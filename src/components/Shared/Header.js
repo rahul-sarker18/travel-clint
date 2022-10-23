@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Context/Usercontext";
 
 const Header = () => {
+  const { user, signoutfunc } = useContext(AuthContext);
+
+  const handelsignuot = () => {
+    signoutfunc()
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  console.log(user?.displayName);
   return (
     <div className="navbar bg-base-100 bg-orange-300 text-slate-900 shadow-lg">
       <div className="navbar-start">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          {/* <img src="../../img/logo.png" alt="" /> */}
+          <img src="../../img/logo.png" alt="" />
           TRAVEL..
         </Link>
       </div>
@@ -25,12 +35,17 @@ const Header = () => {
           <li>
             <NavLink to="/blog">Bolg</NavLink>
           </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/signup">SignUp</NavLink>
-          </li>
+          {user?.uid ? (
+            <li><Link  onClick={handelsignuot}> Sign Out</Link></li>
+          ) : (
+            <li>
+              <NavLink to="/login">Login</NavLink>
+
+              <li>
+                <NavLink to="/signup">SignUp</NavLink>
+              </li>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -68,23 +83,30 @@ const Header = () => {
           <li>
             <NavLink to="/blog">Bolg</NavLink>
           </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/signup">SignUp</NavLink>
-          </li>
+          {user?.uid ? (
+            <li><Link  onClick={handelsignuot}> Sign Out</Link></li>
+          ) : (
+            <li>
+              <NavLink to="/login">Login</NavLink>
+
+              <li>
+                <NavLink to="/signup">SignUp</NavLink>
+              </li>
+            </li>
+          )}
         </ul>
       </div>
 
-      <div className="navbar-end mr-10 ">
-        <div className="avatar indicator">
-          <span className="indicator-item badge badge-secondary">typing…</span>
-          <div className="w-10 h-10 rounded-full ">
-            <img src="https://placeimg.com/160/160/people" alt="" />
+      {user?.uid ? (
+        <div className="navbar-end mr-10 ">
+          <div className="avatar indicator">
+            <span className="indicator-item badge badge-secondary"></span>
+            <div className="w-10 h-10 rounded-full">
+              <img src="https://placeimg.com/160/160/people" alt="" />
+            </div>
           </div>
         </div>
-      </div>
+      ) : undefined}
     </div>
   );
 };
