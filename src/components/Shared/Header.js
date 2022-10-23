@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/Usercontext";
 
 const Header = () => {
@@ -10,8 +10,11 @@ const Header = () => {
       .then(() => {})
       .catch(() => {});
   };
+const navlink = useNavigate()
+  const handelprofile =()=>{
+    navlink('/profile')
+  }
 
-  console.log(user?.displayName);
   return (
     <div className="navbar bg-base-100 bg-orange-300 text-slate-900 shadow-lg">
       <div className="navbar-start">
@@ -42,9 +45,8 @@ const Header = () => {
           ) : (
             <li>
               <NavLink to="/login">Login</NavLink>
-                <NavLink to="/signup">SignUp</NavLink>
-              </li>
-          
+              <NavLink to="/signup">SignUp</NavLink>
+            </li>
           )}
         </ul>
       </div>
@@ -68,7 +70,7 @@ const Header = () => {
         </label>
         <ul
           tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu menu-compact dropdown-content bg-slate-200  mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
             <NavLink to="/news">News</NavLink>
@@ -97,14 +99,16 @@ const Header = () => {
       </div>
 
       {user?.uid ? (
-        <div className="navbar-end mr-10 ">
-          <div className="avatar indicator">
-            <span className="indicator-item badge badge-secondary"></span>
-            <div className="w-10 h-10 rounded-full">
-              <img src="https://placeimg.com/160/160/people" alt="" />
+    
+          <div className="navbar-end mr-10  " onClick={handelprofile}>
+            <div className="avatar indicator">
+              <span className="indicator-item badge badge-secondary"></span>
+              <div className="w-10 h-10 rounded-full">
+                <img src="https://placeimg.com/160/160/people" alt="" />
+              </div>
             </div>
           </div>
-        </div>
+       
       ) : undefined}
     </div>
   );

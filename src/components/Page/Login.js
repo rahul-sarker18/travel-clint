@@ -20,8 +20,6 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
-
     loginemaipass(email, password)
       .then((result) => {
         const user = result.user;
@@ -36,7 +34,7 @@ const Login = () => {
     .then(res => {
       navegate(from , {replace : true})
     })
-    .catch(e => console.log(e))
+    .catch(e => console.error(e))
   }
   
   return (
