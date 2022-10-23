@@ -6,7 +6,8 @@ const Header = () => {
     <div className="navbar bg-base-100 bg-orange-300 text-slate-900 shadow-lg">
       <div className="navbar-start">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+          {/* <img src="../../img/logo.png" alt="" /> */}
+          TRAVEL..
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

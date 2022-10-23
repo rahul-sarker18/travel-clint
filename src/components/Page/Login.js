@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/Usercontext";
 
 const Login = () => {
+  const { loginemaipass } = useContext(AuthContext);
+
+  const handeltologin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+
+    loginemaipass(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 my-10 mx-auto">
       <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form className="space-y-6 ng-untouched ng-pristine ng-valid">
+      <form
+        onSubmit={handeltologin}
+        className="space-y-6 ng-untouched ng-pristine ng-valid"
+      >
         <div className="space-y-1 text-sm">
-          <label for="email" className="block dark:text-gray-400">
+          <label htmlFor="email" className="block dark:text-gray-400">
             Email
           </label>
           <input
@@ -19,7 +42,7 @@ const Login = () => {
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label for="password" className="block dark:text-gray-400">
+          <label htmlFor="password" className="block dark:text-gray-400">
             Password
           </label>
           <input
