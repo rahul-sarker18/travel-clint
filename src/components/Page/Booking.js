@@ -6,12 +6,10 @@ import BookRum from "./BookRum";
 const Booking = () => {
 
     const rumedata = useLoaderData();
-    console.log(rumedata);
     
   const { user } = useContext(AuthContext);
+  
   return <div>
-
-
 
 
     <div>

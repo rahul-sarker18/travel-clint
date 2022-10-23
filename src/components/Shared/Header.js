@@ -36,15 +36,15 @@ const Header = () => {
             <NavLink to="/blog">Bolg</NavLink>
           </li>
           {user?.uid ? (
-            <li><Link  onClick={handelsignuot}> Sign Out</Link></li>
+            <li>
+              <Link onClick={handelsignuot}> Sign Out</Link>
+            </li>
           ) : (
             <li>
               <NavLink to="/login">Login</NavLink>
-
-              <li>
                 <NavLink to="/signup">SignUp</NavLink>
               </li>
-            </li>
+          
           )}
         </ul>
       </div>
@@ -84,14 +84,13 @@ const Header = () => {
             <NavLink to="/blog">Bolg</NavLink>
           </li>
           {user?.uid ? (
-            <li><Link  onClick={handelsignuot}> Sign Out</Link></li>
+            <li>
+              <Link onClick={handelsignuot}> Sign Out</Link>
+            </li>
           ) : (
             <li>
               <NavLink to="/login">Login</NavLink>
-
-              <li>
-                <NavLink to="/signup">SignUp</NavLink>
-              </li>
+              <NavLink to="/signup">SignUp</NavLink>
             </li>
           )}
         </ul>

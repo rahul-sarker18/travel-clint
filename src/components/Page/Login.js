@@ -1,12 +1,17 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/Usercontext";
 import { FaGoogle } from "react-icons/fa";
 import {  AiOutlineGithub } from "react-icons/ai";
 
 
 const Login = () => {
-  const { loginemaipass } = useContext(AuthContext);
+  const { loginemaipass ,googlesignup } = useContext(AuthContext);
+
+
+  const navegate = useNavigate();
+  const location =useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const handeltologin = (e) => {
     e.preventDefault();
@@ -20,11 +25,20 @@ const Login = () => {
     loginemaipass(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         form.reset();
+        navegate(from , {replace : true})
       })
       .catch((error) => console.error(error));
   };
+
+  const  googlehandel =()=>{
+    googlesignup()
+    .then(res => {
+      navegate(from , {replace : true})
+    })
+    .catch(e => console.log(e))
+  }
+  
   return (
     <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 my-10 mx-auto">
       <h1 className="text-2xl font-bold text-center">Login</h1>
@@ -71,7 +85,7 @@ const Login = () => {
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Twitter" className="p-3 text-3xl hover:text-blue-500 rounded-sm">
+        <button onClick={googlehandel} aria-label="Log in with Twitter" className="p-3 text-3xl hover:text-blue-500 rounded-sm">
          <FaGoogle/>
         </button>
         <button aria-label="Log in with GitHub" className="p-3 text-3xl  hover:text-blue-500 rounded-sm">

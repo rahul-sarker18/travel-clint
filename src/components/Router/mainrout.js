@@ -7,6 +7,7 @@ import Home from "../Page/home/Home";
 import Login from "../Page/Login";
 import News from "../Page/News";
 import Signup from "../Page/Signup";
+import Privatroute from "./Privatroute";
 
 
 export const router = createBrowserRouter([
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
       { path: "login", element: <Login></Login> },
       { path: "contracts", element: <Contacts></Contacts> },
       { path: "blog", element: <Blog></Blog> },
-      { path: "book", element: <Booking></Booking> , loader: async()=>fetch('https://travel-sarver.vercel.app/rum')},
+      { path: "book", element: <Privatroute> <Booking></Booking></Privatroute> , loader: async()=>fetch('https://travel-sarver.vercel.app/rum')},
     ],
   },
 ]);
